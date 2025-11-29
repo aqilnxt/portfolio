@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>aqilnxt</title>
+    <link href="src/output.css" rel="stylesheet" />
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <script>
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+
+    <!-- Favicon untuk semua device dan platform -->
+
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/x-icon" href="public/favicon_io/favicon.ico" />
+
+    <!-- PNG favicon untuk berbagai ukuran -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="public/favicon_io/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="public/favicon_io/favicon-32x32.png"
+    />
+
+    <!-- Apple Touch Icon (iOS) -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="public/favicon_io/apple-touch-icon.png"
+    />
+
+    <!-- Android Chrome -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="public/favicon_io/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="public/favicon_io/android-chrome-512x512.png"
+    />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#14b8a6" />
+
+    <!-- Manifest (PWA) -->
+    <link rel="manifest" href="public/favicon_io/site.webmanifest" />
+  </head>
+  <body>
+    <!-- Header Start -->
+    <header
+      class="absolute top-0 left-0 z-10 flex w-full items-center bg-transparent"
+    >
+      <div class="container">
+        <div class="relative flex items-center justify-between">
+          <div class="px-4">
+            <a href="#home" class="flex items-center gap-2 py-6">
+              <!-- Logo -->
+              <img
+                src="dist/favicon_io/favicon.ico"
+                alt="aqilnxt logo"
+                class="mr-2 h-5 w-5 rounded-full"
+              />
+              <!-- Text -->
+              <span class="text-lg font-bold text-primary">aqilnxt</span>
+            </a>
+          </div>
+          <div class="flex items-center px-4">
+            <button
+              id="hamburger"
+              name="hamburger"
+              type="button"
+              class="absolute right-4 block lg:hidden"
+            >
+              <span
+                class="hamburger-line origin-top-left transition duration-300 ease-in-out"
+              ></span>
+              <span
+                class="hamburger-line transition duration-300 ease-in-out"
+              ></span>
+              <span
+                class="hamburger-line origin-bottom-left transition duration-300 ease-in-out"
+              ></span>
+            </button>
+
+            <nav
+              id="nav-menu"
+              class="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark dark:shadow-slate-500 lg:static lg:block lg:max-w-full lg:rounded-none lg:bg-transparent lg:shadow-none lg:dark:bg-transparent"
+            >
+              <ul class="block lg:flex">
+                <li class="group">
+                  <a
+                    href="#home"
+                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Home</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="#about"
+                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >About Me</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="#portfolio"
+                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Portfolio</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="#clients"
+                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Clients</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="#blog"
+                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Blog</a
+                  >
+                </li>
+                <li class="group">
+                  <a
+                    href="#contact"
+                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white"
+                    >Contact</a
+                  >
+                </li>
+                <li class="flex items-center pl-8 lg:mt-0">
+                  <button
+                    id="theme-toggle"
+                    type="button"
+                    class="rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700"
+                  >
+                    <!-- Ikon Bulan (Awalnya ditampilkan) -->
+                    <svg
+                      id="theme-toggle-dark-icon"
+                      class="h-5 w-5 text-dark dark:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                      ></path>
+                    </svg>
+                    <!-- Ikon Matahari (Awalnya disembunyikan ) -->
+                    <svg
+                      id="theme-toggle-light-icon"
+                      class="hidden h-5 w-5 text-dark dark:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 5.05A1 1 0 003.636 6.464l.707.707a1 1 0 001.414-1.414l-.707-.707zM3 11a1 1 0 100-2H2a1 1 0 100 2h1zM6.464 16.364a1 1 0 01-1.414 0l-.707-.707a1 1 0 011.414-1.414l.707.707a1 1 0 010 1.414z"
+                      ></path>
+                    </svg>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Hero Section Start -->
+    <section id="home" class="pt-36 dark:bg-dark">
+      <div class="container">
+        <div class="flex flex-wrap">
+          <div
+            class="w-full self-center px-4 lg:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <h1 class="text-base font-semibold text-primary md:text-xl">
+              Hello World 👋, I'm
+              <span
+                class="mt-1 block text-4xl font-bold text-dark dark:text-white lg:text-5xl"
+                >aqilnxt</span
+              >
+            </h1>
+            <h2 class="mb-5 text-lg font-medium text-secondary lg:text-2xl">
+              Web Dev &
+              <span class="text-dark dark:text-white">High School Student</span>
+            </h2>
+            <p class="mb-10 font-medium leading-relaxed text-secondary">
+              Ngoding itu candu; seperti menatapmu dari jauh—tenang,
+              <span class="font-bold text-dark dark:text-white"
+                >tapi selalu ingin kembali.</span
+              >
+            </p>
+
+            <a
+              href="#"
+              class="rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+              >Contact</a
+            >
+          </div>
+          <div
+            class="w-full self-end px-4 lg:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <div class="relative mt-10 lg:right-0 lg:mt-9">
+              <img
+                src="public/img/aqil.png"
+                alt="ohmyqil"
+                class="relative z-10 mx-auto max-w-full"
+              />
+              <span
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 md:scale-125"
+              >
+                <svg
+                  width="400"
+                  height="400"
+                  viewBox="0 0 200 200"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#8b5cf6"
+                    d="M47.4,-51C59.2,-35.6,65.1,-17.8,63.4,-1.7C61.7,14.5,52.6,28.9,40.8,36.6C28.9,44.2,14.5,45,-2,47C-18.4,49,-36.8,52.1,-45.4,44.5C-53.9,36.8,-52.5,18.4,-51.2,1.3C-49.9,-15.8,-48.7,-31.7,-40.2,-47.1C-31.7,-62.4,-15.8,-77.3,1,-78.3C17.8,-79.2,35.6,-66.3,47.4,-51Z"
+                    transform="translate(100 100) scale(1.1)"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- About Section Start -->
+    <section id="about" class="pt-36 pb-32 dark:bg-dark">
+      <div class="container">
+        <div class="flex flex-wrap">
+          <div
+            class="mb-10 w-full px-4 lg:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <h4 class="mb-3 text-lg font-bold uppercase text-primary">
+              About Me
+            </h4>
+            <h2
+              class="mb-5 max-w-md text-3xl font-bold text-dark dark:text-white lg:text-4xl"
+            >
+              From Student to Web Developer
+            </h2>
+            <p class="max-w-xl text-base font-medium text-secondary lg:text-lg">
+              Perjalanan saya di dunia programming dimulai dari rasa ingin tahu
+              yang besar terhadap teknologi. Kini, saya fokus mengasah kemampuan
+              web development sambil terus eksplorasi teknologi terbaru untuk
+              menciptakan solusi digital yang impactful.
+            </p>
+          </div>
+          <div
+            class="w-full px-4 lg:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <h3
+              class="mb-4 text-2xl font-semibold text-dark dark:text-white lg:pt-10 lg:text-3xl"
+            >
+              Get In Touch
+            </h3>
+            <p class="mb-6 text-base font-medium text-secondary lg:text-lg">
+              Always open to connecting with developers, tech enthusiasts, and
+              creative minds. Let's collaborate, share ideas, or simply geek out
+              about technology together!
+            </p>
+            <div class="flex items-center">
+              <!-- Youtube -->
+              <a
+                href="https://youtube.com/webprogrammingunpas"
+                target="_blank"
+                class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white"
+                data-aos="zoom-in"
+                data-aos-delay="300"
+              >
+                <svg
+                  role="img"
+                  width="20"
+                  class="fill-current"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>YouTube</title>
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                  />
+                </svg>
+              </a>
+
+              <!-- Instagram -->
+              <a
+                href="https://instagram.com/sandhikagalih"
+                target="_blank"
+                class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white"
+                data-aos="zoom-in"
+                data-aos-delay="350"
+              >
+                <svg
+                  role="img"
+                  width="20"
+                  class="fill-current"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Instagram</title>
+                  <path
+                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
+                  />
+                </svg>
+              </a>
+
+              <!-- Twitter -->
+              <a
+                href="https://twitter.com/sandhikagalih"
+                target="_blank"
+                class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white"
+                data-aos="zoom-in"
+                data-aos-delay="400"
+              >
+                <svg
+                  role="img"
+                  width="20"
+                  class="fill-current"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>Twitter</title>
+                  <path
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                  />
+                </svg>
+              </a>
+
+              <!-- TikTok -->
+              <a
+                href="https://tiktok.com/@sandhika.galih"
+                target="_blank"
+                class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white"
+                data-aos="zoom-in"
+                data-aos-delay="450"
+              >
+                <svg
+                  role="img"
+                  width="20"
+                  class="fill-current"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>TikTok</title>
+                  <path
+                    d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"
+                  />
+                </svg>
+              </a>
+
+              <!-- LinkedIn -->
+              <a
+                href="https://linkedin.com/in/sandhikagalih"
+                target="_blank"
+                class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white"
+                data-aos="zoom-in"
+                data-aos-delay="500"
+              >
+                <svg
+                  role="img"
+                  width="20"
+                  class="fill-current"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <title>LinkedIn</title>
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- Portfolio Section Start -->
+    <section id="portfolio" class="bg-slate-100 pt-36 pb-16 dark:bg-slate-800">
+      <div class="container">
+        <div class="w-full px-4">
+          <div
+            class="mx-auto mb-16 max-w-xl text-center"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <h4 class="mb-2 text-lg font-semibold text-primary">Portfolio</h4>
+            <h2
+              class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl"
+            >
+              My Project
+            </h2>
+            <p class="text-md font-medium text-secondary md:text-lg">
+              Berikut adalah beberapa project yang telah saya kerjakan. Setiap
+              project merupakan hasil dari pembelajaran dan eksplorasi teknologi
+              web modern, mulai dari e-commerce, aplikasi manajemen, hingga
+              landing page interaktif.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-10/12"
+        >
+          <div
+            class="mb-12 p-4 md:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <div class="overflow-hidden rounded-md shadow-md">
+              <img
+                src="public/img/portfolio/1.png"
+                alt="Landing Page"
+                width="w-full"
+              />
+            </div>
+            <h3
+              class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white"
+            >
+              E-Commerce Platform
+            </h3>
+            <p class="text-base font-medium text-secondary">
+              Platform e-commerce modern dengan fitur lengkap seperti katalog
+              produk, keranjang belanja, dan sistem checkout. Dibangun
+              menggunakan teknologi web terkini untuk memberikan pengalaman
+              berbelanja yang smooth dan user-friendly.
+            </p>
+          </div>
+          <div
+            class="mb-12 p-4 md:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+          >
+            <div class="overflow-hidden rounded-md shadow-md">
+              <img
+                src="public/img/portfolio/2.png"
+                alt="E-Commerce"
+                width="w-full"
+              />
+            </div>
+            <h3
+              class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white"
+            >
+              CafeKita - Cafe Management System
+            </h3>
+            <p class="text-base font-medium text-secondary">
+              Website aplikasi untuk manajemen cafe yang mencakup menu digital,
+              sistem pemesanan, dan dashboard admin. Dirancang untuk memudahkan
+              operasional cafe dengan interface yang intuitif dan responsive.
+            </p>
+          </div>
+          <div
+            class="mb-12 p-4 md:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+          >
+            <div class="overflow-hidden rounded-md shadow-md">
+              <img
+                src="public/img/portfolio/3.png"
+                alt="Technical Documentation"
+                width="w-full"
+              />
+            </div>
+            <h3
+              class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white"
+            >
+              Point of Sale (POS) System
+            </h3>
+            <p class="text-base font-medium text-secondary">
+              Aplikasi kasir berbasis web untuk membantu transaksi penjualan
+              dengan cepat dan efisien. Dilengkapi dengan fitur pencatatan
+              transaksi, manajemen stok, dan laporan penjualan real-time.
+            </p>
+          </div>
+          <div
+            class="mb-12 p-4 md:w-1/2"
+            data-aos="zoom-in"
+            data-aos-delay="500"
+          >
+            <div class="overflow-hidden rounded-md shadow-md">
+              <img
+                src="public/img/portfolio/4.png"
+                alt="Tribute Page"
+                width="w-full"
+              />
+            </div>
+            <h3
+              class="mt-5 mb-3 text-xl font-semibold text-dark dark:text-white"
+            >
+              Ziyadah Web Application
+            </h3>
+            <p class="text-base font-medium text-secondary">
+              Aplikasi web interaktif yang dirancang dengan fokus pada user
+              experience dan fungsionalitas yang optimal. Menggunakan teknologi
+              modern untuk memberikan performa terbaik dan tampilan yang
+              engaging.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Portfolio Section End -->
+
+    <!-- Clients Section Start -->
+    <section id="clients" class="bg-slate-800 pt-36 pb-32 dark:bg-slate-300">
+      <div class="container">
+        <div class="w-full px-4">
+          <div
+            class="mx-auto mb-16 text-center"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <h4 class="mb-2 text-lg font-semibold text-primary">Clients</h4>
+            <h2
+              class="mb-4 text-3xl font-bold text-white dark:text-dark sm:text-4xl lg:text-5xl"
+            >
+              Yang Pernah Bekerjasama
+            </h2>
+            <p class="text-md font-medium text-secondary md:text-lg">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+              suscipit facilis velit!
+            </p>
+          </div>
+        </div>
+
+        <div class="w-full px-4">
+          <div class="flex flex-wrap items-center justify-center">
+            <a
+              href="#"
+              class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
+              <img src="public/img/clients/google.svg" alt="Google" />
+            </a>
+            <a
+              href="#"
+              class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
+              <img src="public/img/clients/gojek.svg" alt="Gojek" />
+            </a>
+            <a
+              href="#"
+              class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
+              <img src="public/img/clients/tokopedia.svg" alt="Tokopedia" />
+            </a>
+            <a
+              href="#"
+              class="mx-4 max-w-[120px] py-4 opacity-60 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0 lg:mx-6 xl:mx-8"
+              data-aos="zoom-in"
+              data-aos-delay="500"
+            >
+              <img src="public/img/clients/traveloka.svg" alt="traveloka" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Clients Section End -->
+
+    <!-- Blog Section Start -->
+    <section id="blog" class="bg-slate-100 pt-36 pb-32 dark:bg-dark">
+      <div class="container">
+        <div class="w-full px-4">
+          <div
+            class="mx-auto mb-16 max-w-xl text-center"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <h4 class="mb-2 text-lg font-semibold text-primary">Blog</h4>
+            <h2
+              class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl"
+            >
+              Latest Posts
+            </h2>
+            <p class="text-md font-medium text-secondary md:text-lg">
+              Dive into my latest articles covering everything from web
+              development tips to tech trends and lifestyle musings. Fresh
+              perspectives, practical insights.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap">
+          <div
+            class="w-full px-4 lg:w-1/2 xl:w-1/3"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <div
+              class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800"
+            >
+              <img
+                src="public/img/blog/coffee.jpg"
+                alt="Coffee"
+                class="h-48 w-full object-cover"
+              />
+              <div class="py-8 px-6">
+                <h3>
+                  <a
+                    href="#"
+                    class="mb-3 block truncate text-xl font-semibold text-dark hover:text-primary dark:text-white"
+                    >Coffee Chronicles: From Bean to Bliss
+                  </a>
+                </h3>
+                <p class="mb-6 text-base font-medium text-secondary">
+                  Exploring the rich world of specialty coffee, brewing methods,
+                  and cafe culture. Whether you're a casual sipper or a
+                  dedicated coffee enthusiast, discover what makes each cup
+                  extraordinary.
+                </p>
+                <a
+                  href="#"
+                  class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white hover:opacity-80"
+                  >Baca Selengkapnya</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="w-full px-4 lg:w-1/2 xl:w-1/3"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+          >
+            <div
+              class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800"
+            >
+              <img
+                src="public/img/blog/wibu.jpeg"
+                alt="Wibu"
+                class="h-48 w-full object-cover"
+              />
+              <div class="py-8 px-6">
+                <h3>
+                  <a
+                    href="#"
+                    class="mb-3 block truncate text-xl font-semibold text-dark hover:text-primary dark:text-white"
+                    >When Code Meets Anime: A Weeb Developer's Tale</a
+                  >
+                </h3>
+                <p class="mb-6 text-base font-medium text-secondary">
+                  Balancing semicolons and subtitles—how anime influences my
+                  coding style. From naming variables after favorite characters
+                  to finding inspiration in storylines, here's my journey as a
+                  developer otaku.
+                </p>
+                <a
+                  href="#"
+                  class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white hover:opacity-80"
+                  >Baca Selengkapnya</a
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="w-full px-4 lg:w-1/2 xl:w-1/3"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+          >
+            <div
+              class="mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800"
+            >
+              <img
+                src="public/img/blog/web-3.jpeg"
+                alt="Web 3"
+                class="h-48 w-full object-cover"
+              />
+              <div class="py-8 px-6">
+                <h3>
+                  <a
+                    href="#"
+                    class="mb-3 block truncate text-xl font-semibold text-dark hover:text-primary dark:text-white"
+                    >Decoding Cryptocurrency: A Developer's Perspective</a
+                  >
+                </h3>
+                <p class="mb-6 text-base font-medium text-secondary">
+                  Breaking down blockchain, smart contracts, and the exciting
+                  future of decentralized web. Learn how crypto technology is
+                  revolutionizing not just finance, but the entire digital
+                  landscape.
+                </p>
+                <a
+                  href="#"
+                  class="rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white hover:opacity-80"
+                  >Baca Selengkapnya</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Contact Section Start -->
+    <section id="contact" class="pt-36 pb-32 dark:bg-slate-800">
+      <div class="container">
+        <div class="w-full px-4">
+          <div
+            class="mx-auto mb-16 max-w-xl text-center"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <h4 class="mb-2 text-lg font-semibold text-primary">Contact</h4>
+            <h2
+              class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl"
+            >
+              Contact Me
+            </h2>
+            <p class="text-md font-medium text-secondary md:text-lg">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Blanditiis, sed.
+            </p>
+          </div>
+        </div>
+
+        <form>
+          <div class="w-full lg:mx-auto lg:w-2/3">
+            <div
+              class="mb-8 w-full px-4"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
+              <label for="name" class="text-base font-bold text-primary"
+                >Nama</label
+              >
+              <input
+                type="text"
+                id="name"
+                class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+            <div
+              class="mb-8 w-full px-4"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
+              <label for="email" class="text-base font-bold text-primary"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                class="w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+            </div>
+            <div
+              class="mb-8 w-full px-4"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
+              <label for="message" class="text-base font-bold text-primary"
+                >Pesan</label
+              >
+              <textarea
+                type="email"
+                id="email"
+                class="h-32 w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              ></textarea>
+            </div>
+            <div class="w-full px-4" data-aos="zoom-in" data-aos-delay="500">
+              <button
+                class="w-full rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-500 hover:opacity-80 hover:shadow-lg"
+              >
+                Kirim
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- Contact Section End -->
+
+    <!-- Footer Start -->
+    <footer class="bg-dark pt-24 pb-12">
+      <div class="container">
+        <div class="flex flex-wrap">
+          <div
+            class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/2 lg:w-1/4"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <h2 class="mb-5 text-4xl font-bold text-primary">aqilnxt.</h2>
+            <h3 class="mb-2 text-2xl font-bold">Contact me</h3>
+            <p>aqilnxt@gmail.com</p>
+            <p>Jl. Swasembada Barat XX</p>
+            <p>Jakarta Utara</p>
+          </div>
+          <div
+            class="mb-12 w-full px-4 md:w-1/2 lg:w-1/4"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <h3 class="mb-5 text-xl font-semibold text-white">
+              Article Category
+            </h3>
+            <ul class="text-slate-300">
+              <li>
+                <a
+                  href="#"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Programming</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Technology</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Life Style</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="mb-12 w-full px-4 md:w-1/2 lg:w-1/4"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+          >
+            <h3 class="mb-5 text-xl font-semibold text-white">Navigation</h3>
+            <ul class="text-slate-300">
+              <li>
+                <a
+                  href="#home"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >About Me</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#portfolio"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Portfolio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#clients"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Clients</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div
+            class="mb-12 w-full px-4 md:w-1/2 lg:w-1/4"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+          >
+            <h3 class="mb-5 text-xl font-semibold text-white">Resources</h3>
+            <ul class="text-slate-300">
+              <li>
+                <a
+                  href="#blog"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Blog</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Contact</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="mb-3 inline-block text-base hover:text-primary"
+                  >Terms of Service</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="w-full border-t border-slate-700 pt-10">
+          <p class="text-center text-xs font-medium text-slate-500">
+            Gently crafted with care by
+            <a
+              href="https://tailwindcss.com"
+              target="_blank"
+              class="font-bold text-primary"
+              >aqilnxt</a
+            >. © 2024 All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Back to top Start -->
+    <a
+      href="#home"
+      class="fixed bottom-4 right-4 z-9999 hidden h-11 w-11 items-center justify-center rounded-lg bg-primary p-4 hover:animate-pulse"
+      id="to-top"
+    >
+      <svg
+        class="h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5 10l7-7m0 0l7 7m-7-7v18"
+        />
+      </svg>
+    </a>
+    <!-- Back to top End -->
+
+    <script src="src/js/main.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Inisialisasi AOS
+      AOS.init({
+        duration: 800, // Durasi animasi dalam milidetik
+        once: true, // Animasi hanya berjalan sekali
+        offset: 100, // Jarak offset dari atas sebelum animasi dimulai
+      });
+    </script>
+  </body>
+</html>

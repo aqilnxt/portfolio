@@ -1,0 +1,64 @@
+/* input css */
+@import "tailwindcss";
+
+@theme {
+  /* Container */
+  --container-center: true;
+  --container-padding: 1rem;
+
+  /* Colors */
+  /* --color-primary: #14b8a6;
+  --color-secondary: #64748b;
+  --color-dark: #0f172a; */
+
+  --color-primary: #8b5cf6;  
+  --color-secondary: #64748b;  
+  --color-dark: #0f172a; 
+
+  /* Screens/Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1320px;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+/* Base styles */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Navbar styles */
+.navbar-fixed {
+  @apply fixed z-9999 bg-white/70 backdrop-blur-sm dark:bg-dark/50;
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Hamburger menu styles */
+.hamburger-line {
+  @apply my-2 block h-0.5 w-[30px] bg-dark dark:bg-white;
+}
+
+.hamburger-active > span:nth-child(1) {
+  @apply rotate-45;
+}
+
+.hamburger-active > span:nth-child(2) {
+  @apply scale-0;
+}
+
+.hamburger-active > span:nth-child(3) {
+  @apply -rotate-45;
+}
+
+/* Dark mode toggle */
+#dark-toggle:checked ~ label div.toggle-circle {
+  @apply translate-x-3;
+}
