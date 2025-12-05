@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 // Untuk aqilnxt.github.io (user/organization page), base harus '/'
 export default defineConfig({
   // Base public path untuk GitHub Pages user/organization page
-  base: "/portfolio/",
+  base: "/",
 
   // Direktori build output
   build: {
