@@ -33,7 +33,6 @@ const THEME_LIGHT = "light";
 // APP INITIALIZATION
 // =====================================
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🚀 App initialized!");
 
   initAOS();
   initNavbar();
@@ -41,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initThemeToggle();
   initBackToTop();
   initTypingEffect();
+  initContactForm();
 
-  console.log("✅ All features loaded!");
 });
 
 // =====================================
@@ -50,13 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // =====================================
 function initAOS() {
   AOS.init({
-    duration: 1000, // Durasi animasi lebih smooth
-    once: true, // Animasi hanya sekali
-    offset: 120, // Offset untuk trigger animasi
-    easing: "ease-out-cubic", // Easing yang smooth
-    delay: 0, // Delay default
-    anchorPlacement: "top-bottom", // Trigger saat elemen mencapai bagian bawah viewport
-    mirror: false, // Tidak perlu animasi saat scroll kembali
+    duration: 1000,
+    once: true,
+    offset: 120,
+    easing: "ease-out-cubic",
+    delay: 0,
+    anchorPlacement: "top-bottom",
+    mirror: false,
   });
   console.log("✨ AOS initialized with professional animations");
 }
@@ -68,7 +67,7 @@ function initNavbar() {
   const header = document.querySelector("header");
 
   if (!header) {
-    console.warn("⚠️ Header element not found");
+    console.warn("Header element not found");
     return;
   }
 
@@ -81,7 +80,6 @@ function initNavbar() {
   }, 100);
 
   window.addEventListener("scroll", handleScroll, { passive: true });
-  console.log("📍 Navbar scroll effect initialized");
 }
 
 // =====================================
@@ -92,7 +90,7 @@ function initHamburgerMenu() {
   const navMenu = document.querySelector("#nav-menu");
 
   if (!hamburger || !navMenu) {
-    console.warn("⚠️ Hamburger or nav-menu not found");
+    console.warn("Hamburger or nav-menu not found");
     return;
   }
 
@@ -136,8 +134,6 @@ function initHamburgerMenu() {
     navMenu.classList.add("hidden");
     hamburger.setAttribute("aria-expanded", "false");
   }
-
-  console.log("🍔 Hamburger menu initialized");
 }
 
 // =====================================
@@ -152,7 +148,7 @@ function initThemeToggle() {
   const html = document.documentElement;
 
   if (!themeToggleBtn || !themeToggleDarkIcon || !themeToggleLightIcon) {
-    console.warn("⚠️ Theme toggle elements not found");
+    console.warn("Theme toggle elements not found");
     return;
   }
 
@@ -189,7 +185,6 @@ function initThemeToggle() {
     const currentTheme = getCurrentTheme();
     const newTheme = currentTheme === THEME_DARK ? THEME_LIGHT : THEME_DARK;
     applyTheme(newTheme);
-    console.log(`🎨 Theme switched to: ${newTheme}`);
   }
 
   const initialTheme = getCurrentTheme();
@@ -204,8 +199,6 @@ function initThemeToggle() {
         applyTheme(e.matches ? THEME_DARK : THEME_LIGHT);
       }
     });
-
-  console.log("🌓 Dark mode initialized");
 }
 
 // =====================================
@@ -215,7 +208,7 @@ function initBackToTop() {
   const toTopBtn = document.querySelector("#to-top");
 
   if (!toTopBtn) {
-    console.warn("⚠️ Back to top button not found");
+    console.warn("Back to top button not found");
     return;
   }
 
@@ -235,11 +228,10 @@ function initBackToTop() {
     e.preventDefault();
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
     });
   });
 
-  console.log("⬆️ Back to top button initialized");
+  console.log("Back to top button initialized");
 }
 
 // =====================================
@@ -260,5 +252,67 @@ function initTypingEffect() {
     showCursor: true,
     cursorChar: "|",
   });
-  console.log("⌨️ Typing effect initialized");
+}
+// =====================================
+// CONTACT FORM HANDLER
+// =====================================
+function initContactForm() {
+  const form = document.querySelector("#contact form");
+
+  if (!form) {
+    console.warn("Contact form not found");
+    return;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    // Loading state
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Success
+        submitBtn.textContent = "✓ Sent!";
+        submitBtn.classList.add("bg-green-500");
+        form.reset();
+
+        // Alert success
+        alert("Message sent successfully! I will get back to you soon. 😊");
+
+        // Reset button after 3 seconds
+        setTimeout(() => {
+          submitBtn.textContent = originalText;
+          submitBtn.classList.remove("bg-green-500");
+          submitBtn.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Form error:", error);
+      submitBtn.textContent = "✗ Error";
+      submitBtn.classList.add("bg-red-500");
+
+      alert("Oops! Something went wrong. Please try again.");
+
+      setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.classList.remove("bg-red-500");
+        submitBtn.disabled = false;
+      }, 3000);
+    }
+  });
 }
